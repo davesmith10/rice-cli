@@ -140,6 +140,48 @@ Flags:
   --output string    Output directory for keys (default: ~/.rice/)
 ```
 
+### `rice convert`
+
+Convert WAV files to high-quality MP3. Useful for preparing audio files before adding them to a bundle.
+
+```bash
+rice convert [files...] [flags]
+
+Flags:
+  -o, --output string   Output directory (default: same as input)
+  -b, --bitrate int     CBR bitrate: 128, 192, 256, 320 kbps (default: 320)
+  -q, --quality int     VBR quality: 0-9, lower is better (overrides --bitrate)
+  -f, --force           Overwrite existing output files
+```
+
+**Examples:**
+
+```bash
+# Convert a single file at maximum quality (320 kbps)
+rice convert recording.wav
+
+# Convert multiple files
+rice convert track1.wav track2.wav track3.wav
+
+# Convert all WAV files in a directory
+rice convert audio/
+
+# Use variable bitrate for smaller file sizes
+rice convert *.wav --quality 2
+
+# Output to a specific directory
+rice convert *.wav --output converted/
+
+# Use 256 kbps bitrate
+rice convert track.wav --bitrate 256
+```
+
+**Notes:**
+- The LAME encoder is embedded in the binary - no external dependencies required
+- Default mode is CBR (constant bitrate) at 320 kbps for maximum quality
+- VBR (variable bitrate) mode with `--quality 2` produces high-quality files with smaller sizes
+- Currently supports Linux only; Windows support planned for future release
+
 ## Bundle Structure
 
 ```

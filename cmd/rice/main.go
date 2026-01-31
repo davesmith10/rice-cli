@@ -34,6 +34,7 @@ as a single archive file.`,
 	rootCmd.AddCommand(infoCmd())
 	rootCmd.AddCommand(describeCmd())
 	rootCmd.AddCommand(keygenCmd())
+	rootCmd.AddCommand(convertCmd())
 
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Fprintln(os.Stderr, err)
